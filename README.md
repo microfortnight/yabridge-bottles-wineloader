@@ -45,13 +45,7 @@ chmod +x ~/.local/bin/wineloader.sh
 ```
 
 ### Create a systemd user environment variable
-Create the directory ``~/.config/environment.d`` if it does not exist, then create the file ``~/.config/environment.d/wineloader.conf``.
-Change the ``<username>`` to your username.
-
-```bash
-# ~/.config/environment.d/wineloader.conf
-WINELOADER=/home/<username>/.local/bin/wineloader.sh
-```
+Create the directory ``~/.config/environment.d`` if it does not exist, then place the file ``wineloader.conf`` inside.
 
 #### Reboot
 
