@@ -6,10 +6,15 @@ if [ -z "$YQ" ]; then
 fi
 
 SYSTEM_WINE=$(command -v wine)
-if [ -z "$SYSTEM_WINE" ]; then
-  echo "Error: wine is not installed." >&2
-  exit 1
-fi
+
+call_system_wine() {
+    if [ -n "$SYSTEM_WINE" ]; then
+        exec "$SYSTEM_WINE" "$@"
+    else
+        echo "Error: system wine is not installed." >&2
+        exit 1
+    fi
+}
 
 # If bottle.yml exists in the prefix, use the "runner" specified there
 if [[ -e "${WINEPREFIX}/bottle.yml" ]]; then
@@ -31,8 +36,7 @@ if [[ -e "${WINEPREFIX}/bottle.yml" ]]; then
     # Bottles uses "sys-*" (e.g. "sys-wine-9.0") internally to refer to system wine
     # Also fall back to system wine if runner is empty.
     if [[ -z "$RUNNER" || "$RUNNER" == sys-* ]]; then
-        # Use system wine 
-        exec "$SYSTEM_WINE" "$@"
+        call_system_wine "$@"
 
     else
         exec "$BOTTLES_ROOT/runners/$RUNNER/bin/wine" "$@"
@@ -44,7 +48,7 @@ if [[ -e "${WINEPREFIX}/bottle.yml" ]]; then
 #    exec /path/to/your/bin/wine "$@"
 
 else
-    exec "$SYSTEM_WINE" "$@"
+    call_system_wine "$@"
 
 fi
 
