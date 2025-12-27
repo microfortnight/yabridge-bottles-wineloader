@@ -21,42 +21,34 @@ Yabridge [README](https://github.com/robbert-vdh/yabridge) has installation inst
 
 ### Install `yq`
 
-#### Arch Linux
-You can install `yq` from the Arch User Repository (AUR) using `yay`:
+We use `yq`, a command‑line YAML tool, to read the Wine runner from your Bottles config files. Install it like this:
 
-```bash
-yay -S yq
-```
+- **[Arch Linux](https://archlinux.org/packages/extra/any/yq):** `sudo pacman -S yq`
+- **[Debian](https://packages.debian.org/stable/yq):** `sudo apt install yq`
+- **[Fedora](https://packages.fedoraproject.org/pkgs/yq/yq):** `sudo dnf install yq`
+- **[Ubuntu](https://packages.ubuntu.com/questing/yq):** `sudo apt install yq`
 
-#### Debian/Ubuntu
-For Debian and Ubuntu, you can install `yq` using the apt package manager.
-```bash
-sudo apt install yq
-```
+### Creating the WINELOADER environment variable
 
-#### Fedora
-You can install `yq` using the DNF package manager:
+#### Wayland sessions running GNOME (via GDM) or Plasma (via SDDM)
 
-```bash
-sudo dnf install yq
-```
-
-### Download and install wineloader script
-Create the directory ``~/.local/bin`` if it does not exist, then move the downloaded script to ``~/.local/bin/wineloader.sh``:
-
-```bash
-mkdir -p ~/.local/bin
-mv ~/Downloads/wineloader.sh ~/.local/bin/wineloader.sh
-chmod +x ~/.local/bin/wineloader.sh
-```
-
-### Create a systemd user environment variable
 Create the directory ``~/.config/environment.d`` if it does not exist, then place the file ``wineloader.conf`` inside.
+
+#### X.org and other Desktop Environments
+
+If you’re not on GNOME or Plasma with Wayland, the method above won’t work.  
+Instead, refer to the Arch Wiki section on graphical environment variables: [Environment_variables / Graphical environment](https://wiki.archlinux.org/title/Environment_variables#Graphical_environment)
+
+Your graphical environment may pick up the variable if you export it in your `~/.profile`:
+
+```bash
+export WINELOADER=$HOME/.local/bin/wineloader.sh
+```
 
 #### Reboot
 
 ## Usage
-* Install a runner. With stable yabridge 5.1.1, and until issue #382 is fixed, I recommend using kron4ek-wine-9.21-staging-tkg-amd64.
+* Install a runner. With stable yabridge 5.1.1, and until issue [#382](https://github.com/robbert-vdh/yabridge/issues/382) is fixed, I recommend using kron4ek-wine-9.21-staging-tkg-amd64.
   ![Install Runner](assets/images/usage_001_install_runner.png)
 * Create a Bottle for your plugins. You will likely end up with multiple Bottles using different settings, but let's start with a default one, e.g., "VST Plugins Default."
   ![Create Bottle](assets/images/usage_002_create_bottle.png)
