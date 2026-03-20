@@ -36,7 +36,7 @@ Download both files ``wineloader.conf`` and ``wineloader.sh`` from this repo.
 #### Wayland sessions running GNOME (via GDM) or Plasma (via SDDM)
 
 1. Create the directory ``~/.config/environment.d`` if it does not exist, then place the file ``wineloader.conf`` inside.
-2. Place the file ``wineloader.sh`` inside ``~/.local/bin/``.
+2. Place the file ``wineloader.sh`` inside ``~/.local/bin/`` and make sure its executable (ex: ``chmod +x ~/.local/bin/wineloader.sh`` or Right-click > Properties > Permissions > Execute.
 3. Reboot.
 
 #### X.org and other Desktop Environments
