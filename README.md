@@ -27,27 +27,29 @@ We use `yq`, a command‑line YAML tool, to read the Wine runner from your Bottl
 - **[Debian](https://packages.debian.org/stable/yq):** `sudo apt install yq`
 - **[Fedora](https://packages.fedoraproject.org/pkgs/yq/yq):** `sudo dnf install yq`
 - **[Ubuntu](https://packages.ubuntu.com/questing/yq):** `sudo apt install yq`
+- **Bazzite:** `rpm-ostree install yq`
 
 ### Creating the WINELOADER environment variable
 
+Download both files ``wineloader.conf`` and ``wineloader.sh`` from this repo.
+
 #### Wayland sessions running GNOME (via GDM) or Plasma (via SDDM)
 
-Create the directory ``~/.config/environment.d`` if it does not exist, then place the file ``wineloader.conf`` inside.
+1. Create the directory ``~/.config/environment.d`` if it does not exist, then place the file ``wineloader.conf`` inside.
+2. Place the file ``wineloader.sh`` inside ``~/.local/bin/``.
+3. Reboot.
 
 #### X.org and other Desktop Environments
 
-If you’re not on GNOME or Plasma with Wayland, the method above won’t work.  
-Instead, refer to the Arch Wiki section on graphical environment variables: [Environment_variables / Graphical environment](https://wiki.archlinux.org/title/Environment_variables#Graphical_environment)
-
-Your graphical environment may pick up the variable if you export it in your `~/.profile`:
-
+1. If you’re not on GNOME or Plasma with Wayland, the method above won’t work. Instead, refer to the Arch Wiki section on graphical environment variables: [Environment_variables / Graphical environment](https://wiki.archlinux.org/title/Environment_variables#Graphical_environment).
+2. Your graphical environment may pick up the variable if you export it in your `~/.profile`:
 ```bash
 export WINELOADER=$HOME/.local/bin/wineloader.sh
 ```
-
-#### Reboot
+3. Reboot.
 
 ## Usage
+* Open Bottles, go to Main Menu > Preferences.
 * Install a runner. With stable yabridge 5.1.1, and until issue [#382](https://github.com/robbert-vdh/yabridge/issues/382) is fixed, I recommend using kron4ek-wine-9.21-staging-tkg-amd64.
   ![Install Runner](assets/images/usage_001_install_runner.png)
 * Create a Bottle for your plugins. You will likely end up with multiple Bottles using different settings, but let's start with a default one, e.g., "VST Plugins Default."
