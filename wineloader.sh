@@ -72,7 +72,14 @@ if [[ -e "${WINEPREFIX}/bottle.yml" ]]; then
         call_system_wine "$@"
 
     else
-        exec "$BOTTLES_ROOT/runners/$RUNNER/bin/wine" "$@"
+        # Proton runners have wine executable in a files/ subdirectory, or dist/ for older versions like Proton 8.0
+        if [[ -x "$BOTTLES_ROOT/runners/$RUNNER/files/bin/wine" ]]; then
+            exec "$BOTTLES_ROOT/runners/$RUNNER/files/bin/wine" "$@"
+        elif [[ -x "$BOTTLES_ROOT/runners/$RUNNER/dist/bin/wine" ]]; then
+            exec "$BOTTLES_ROOT/runners/$RUNNER/dist/bin/wine" "$@"
+        else
+            exec "$BOTTLES_ROOT/runners/$RUNNER/bin/wine" "$@"
+        fi
 
     fi
 
