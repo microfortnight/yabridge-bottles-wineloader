@@ -27,7 +27,13 @@ We use `yq`, a command‑line YAML tool, to read the Wine runner from your Bottl
 - **[Debian](https://packages.debian.org/stable/yq):** `sudo apt install yq`
 - **[Fedora](https://packages.fedoraproject.org/pkgs/yq/yq):** `sudo dnf install yq`
 - **[Ubuntu](https://packages.ubuntu.com/questing/yq):** `sudo apt install yq`
-- **Bazzite:** `rpm-ostree install yq`
+- **Bazzite/atomic distros:**
+  1. Install `yq` via `pip install --user yq`
+  2. After downloading `wineloader.sh`, edit the script and add this line after the first `#!/bin/bash` line:
+     ```bash
+     export PATH="$HOME/.local/bin:$PATH"
+     ```
+	> When you're done with the installation and you get to run `yabridgectl`, if you get a pop-up about Wine Mono Installer, just hit Cancel since we'll be using the Bottles prefix anyway.
 
 ### Creating the WINELOADER environment variable
 
